@@ -36,8 +36,11 @@ var app = (function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/TOPICXX', function (eventbody) {
-                
+            stompClient.subscribe('/topic/newpoint', (eventbody) => {
+                console.log("Event: ", eventbody);
+                alert(eventbody.body);
+                let point = JSON.parse(eventbody.body);
+                console.log(point)
                 
             });
         });
@@ -46,30 +49,34 @@ var app = (function () {
     
     
 
-    return {
+return {
 
-        init: function () {
-            var can = document.getElementById("canvas");
-            
-            //websocket connection
-            connectAndSubscribe();
-        },
+          init: function () {
+                    var can = document.getElementById("canvas");
+                    console.log("connect");
+                    //websocket connection
+                    connectAndSubscribe();
+          },
 
-        publishPoint: function(px,py){
-            var pt=new Point(px,py);
-            console.info("publishing point at "+pt);
-            addPointToCanvas(pt);
+          publishPoint: function(){
+                    let x = document.getElementById("x").value;
+                    let y = document.getElementById("y").value;
 
-            //publicar el evento
-        },
+                    var pt=new Point(x,y);
+                    console.info("publishing point at ("+ pt.x + ", " + pt.y + ")");
+                    addPointToCanvas(pt);
 
-        disconnect: function () {
-            if (stompClient !== null) {
-                stompClient.disconnect();
-            }
-            setConnected(false);
-            console.log("Disconnected");
-        }
+                    //publicar el evento
+                    stompClient.send("/topic/newpoint", {}, JSON.stringify(pt)); 
+          },
+
+          disconnect: function () {
+                    if (stompClient !== null) {
+                    stompClient.disconnect();
+                    }
+                    setConnected(false);
+                    console.log("Disconnected");
+          }         
     };
 
 })();
