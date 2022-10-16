@@ -17,22 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="/webjars/jquery/jquery.min.js"></script>
-        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+          <title>TODO supply a title</title>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <script src="/webjars/jquery/jquery.min.js"></script>
+          <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+          <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+          <script src="/app.js"></script>
+          <link rel="stylesheet" href="/styles.css">
     </head>
 
-
-    
     <body onload="app.init()">
-        X:<input id="x" type="number"/>
-        Y:<input id="y" type="number"/>        
-        <button onclick="app.publishPoint()">Send point</button>
+          <div>
+          <label> X:</label><input id="x" type="number"/>
+          <label> Y:</label><input id="y" type="number"/>
+          <button onclick="app.publishPoint(document.getElementById('x').value,document.getElementById('y').value)">Send point</button>
+          </div>
         <canvas id="canvas" width="800" height="600"></canvas>
     </body>
-    
-    <script src="/app.js"></script>
 </html>
