@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           <div>
           <label> X:</label><input id="x" type="number"/>
           <label> Y:</label><input id="y" type="number"/>
-          <button onclick="app.publishPoint()">Send point</button>
+          <button onclick="app.publishPoint(document.getElementById('x').value, document.getElementById('y').value)">Send point</button>
           </div>
         <canvas id="canvas" width="800" height="600"></canvas>
     </body>
